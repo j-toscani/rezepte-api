@@ -4,6 +4,7 @@ import cors from "cors";
 
 export const app = express();
 
+const db = process.env.DB_URL || "http://localhost:27017";
 const port = process.env.PORT || 3000;
 
 app.disable("x-powered-by");
