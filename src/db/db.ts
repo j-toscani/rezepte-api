@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
 
-const url = process.env.DB_URL || "mongodb://localhost:27017/test";
+const startDB = (url: string) => {
+  mongoose
+    .connect(url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("DB connected"))
+    .catch(() => console.log("DB did not connect"));
+};
 
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+export default startDB;
