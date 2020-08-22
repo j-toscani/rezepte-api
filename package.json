@@ -4,7 +4,10 @@
   "description": "Speichert Rezepte und ihre Fundorte",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node dist/",
+    "dev:start": "nodemon dist/",
+    "dev:watch": "tsc --watch"
   },
   "repository": {
     "type": "git",
