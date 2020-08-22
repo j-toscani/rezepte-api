@@ -1,30 +1,19 @@
-// get all recipes
-async function getAll() {
-  return 'getAll';
-}
-// get all recipes with certain main ingredients
-async function getByIngredients() {
-  return 'getByIngredients';
-}
-// get a recipe
-async function getOne() {
-  return 'getOne';
-}
-// change information on a recipe
-async function changeOne() {
-  return 'changeOne';
-}
-// add a recipe to a source
-async function addOneTo() {
-  return 'addOneTo';
-}
+// create new recipe entry
 
-const Recipe = {
-  getAll,
-  getByIngredients,
-  getOne,
-  changeOne,
-  addOneTo,
-};
+// get a random recipe
 
-export default Recipe;
+// get all recipes with certain tag
+
+// get recipe by name
+
+// get all recipes in books
+
+// get all recipes from websites
+
+// get all recipes from magazines
+
+// get all recipes from a certain issue
+
+const recipes = {};
+
+export default recipes;

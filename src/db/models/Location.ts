@@ -3,7 +3,7 @@ import Issue from "./Issue";
 import Book from "./Book";
 
 export const DOCUMENT_NAME = "Location";
-export const COLLECTION_NAME = "locationss";
+export const COLLECTION_NAME = "locations";
 
 export default interface Location extends Document {
   name: string;
