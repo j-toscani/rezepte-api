@@ -6,14 +6,10 @@ import sources from "./api/sources";
 
 const router = Router();
 
-router.use("/", (req, res, next) => {
-  res.sendStatus(404);
-});
-
-router.use("/api", (req, res, next) => {
+router.get("/api", (req, res) => {
   console.log("someone logged in");
   console.log("validation complete");
-  next();
+  res.send("You are logged in!");
 });
 
 router.use("/api/locations", locations);

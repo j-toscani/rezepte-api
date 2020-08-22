@@ -25,6 +25,7 @@ export const startServer = () => {
     try {
       app.listen(port, () => {
         console.log(`Server listening on ${port}`);
+        console.log(`Server Adress: http://localhost:${port}`);
         res();
       });
     } catch (err) {

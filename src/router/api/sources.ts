@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(`Content of Body: ${req.body}`);
+  console.log(`Content of Body: ${req.body.message}`);
   res.send("Thannk you from Sources");
 });
 
