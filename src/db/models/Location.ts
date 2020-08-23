@@ -6,12 +6,22 @@ export const DOCUMENT_NAME = "Location";
 export const COLLECTION_NAME = "locations";
 
 export default interface Location extends Document {
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
   description: string;
   source: (Book | Issue)[];
 }
 
 const schema = new Schema({
+  createdAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
   name: {
     type: Schema.Types.String,
     required: true,

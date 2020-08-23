@@ -5,6 +5,8 @@ export const DOCUMENT_NAME = "Source";
 export const COLLECTION_NAME = "sources";
 
 export default interface Source extends Document {
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
   issue?: string;
   location: string;
@@ -12,6 +14,14 @@ export default interface Source extends Document {
 }
 
 const schema = new Schema({
+  createdAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
   name: {
     type: Schema.Types.String,
     required: true,

@@ -7,6 +7,8 @@ export const DOCUMENT_NAME = "Issue";
 export const COLLECTION_NAME = "issues";
 
 export default interface Issue extends Document {
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
   season: number;
   year: number;
@@ -16,6 +18,14 @@ export default interface Issue extends Document {
 }
 
 const schema = new Schema({
+  createdAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
   name: {
     type: Schema.Types.String,
     required: true,

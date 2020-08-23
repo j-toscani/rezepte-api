@@ -7,6 +7,8 @@ export const DOCUMENT_NAME = "Recipe";
 export const COLLECTION_NAME = "recipes";
 
 export default interface Recipe extends Document {
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
   page: string;
   url: string;
@@ -17,6 +19,14 @@ export default interface Recipe extends Document {
 }
 
 const schema = new Schema({
+  createdAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Schema.Types.Date,
+    required: true,
+  },
   name: {
     type: Schema.Types.String,
     required: true,
