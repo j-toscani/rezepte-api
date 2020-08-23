@@ -1,6 +1,7 @@
-import express from "express";
+import express, { Response, Request, NextFunction } from "express";
 import dotenv from "dotenv";
 import { json, urlencoded } from "body-parser";
+import { ApiError, InternalError } from "./core/ApiError";
 import cors from "cors";
 import router from "./router/router";
 import startDB from "./db/db";
@@ -19,6 +20,16 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 app.use(router);
+
+// Middleware Error Handler
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  if (err instanceof ApiError) {
+    ApiError.handle(err, res);
+  } else {
+    ApiError.handle(new InternalError(err.message), res);
+  }
+});
 
 export const startServer = () => {
   const promise = new Promise((res, rej) => {
