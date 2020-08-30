@@ -23,13 +23,13 @@ app.use(router);
 
 // Middleware Error Handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+/* app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof ApiError) {
     ApiError.handle(err, res);
   } else {
     ApiError.handle(new InternalError(err.message), res);
   }
-});
+}); */
 
 export const startServer = () => {
   const promise = new Promise((res, rej) => {

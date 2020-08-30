@@ -1,10 +1,10 @@
 import { Schema, model, Document } from "mongoose";
 import Recipe from "./Recipe";
 
-export const DOCUMENT_NAME = "Source";
-export const COLLECTION_NAME = "sources";
+export const DOCUMENT_NAME = "Website";
+export const COLLECTION_NAME = "websites";
 
-export default interface Source extends Document {
+export default interface Website extends Document {
   createdAt: Date;
   updatedAt: Date;
   name: string;
@@ -38,7 +38,7 @@ const schema = new Schema({
   },
 });
 
-export const SourceModel = model<Source>(
+export const WebsiteModel = model<Website>(
   DOCUMENT_NAME,
   schema,
   COLLECTION_NAME

@@ -1,14 +1,12 @@
 import { Router } from "express";
+import books from "./sources/books";
+import magazines from "./sources/magazines";
+import websites from "./sources/websites";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello from Sources");
-});
-
-router.post("/", (req, res) => {
-  console.log(`Content of Body: ${req.body.message}`);
-  res.send("Thannk you from Sources");
-});
+router.use("/books", books);
+router.use("/magazines", magazines);
+router.use("/websites", websites);
 
 export default router;

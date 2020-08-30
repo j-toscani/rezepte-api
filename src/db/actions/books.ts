@@ -1,66 +1,61 @@
 import Book, { BookModel } from "../models/Book";
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 import { LocationModel } from "../models/Location";
 
 // create new book entry
 async function createBook(book: Book) {
-  try {
-    const now = new Date();
-    book.createdAt = now;
-    book.updatedAt = now;
-    const bookModel = await BookModel.create(book);
-    const savedBook = await bookModel.save();
-    return { savedBook };
-  } catch (error) {
-    return error;
-  }
+  const now = new Date();
+  book.createdAt = now;
+  book.updatedAt = now;
+  const bookModel = await BookModel.create(book);
+  const savedBook = await bookModel.save();
+  return savedBook;
 }
 
 // get all books
-async function findAllBooksWith(options: {}) {
-  try {
-    const books = await BookModel.find(options).lean();
-    return books;
-  } catch (error) {
-    return error;
-  }
+async function findAllBooksWith(options: {} = {}) {
+  const bookDocuments = await BookModel.find(options);
+  if (bookDocuments.length < 1) return null;
+  const populatedBooks = bookDocuments.map((bookDocument) =>
+    bookDocument.execPopulate()
+  );
+  const books = await Promise.all(populatedBooks);
+  return books;
 }
+
 // get one book
-async function findBookById(id: Schema.Types.ObjectId) {
-  try {
-    const book = await BookModel.findById(id).lean();
-    if (!book) throw "Book was not found";
-    return book;
-  } catch (error) {
-    return error;
-  }
+async function findBookById(id: string) {
+  const bookObjectId = Types.ObjectId(id);
+  const bookDocument = await BookModel.findById(bookObjectId);
+  if (!bookDocument) return null;
+  const book = await bookDocument.execPopulate();
+  return book;
 }
 
 // change location of book
 async function changeBookLocation(
-  bookId: Schema.Types.ObjectId,
-  locationId: Schema.Types.ObjectId
-) {
+  bookId: string,
+  locationId: string
+): Promise<Book | null> {
   const now = new Date();
-  try {
-    const location = await LocationModel.findById(locationId);
-    if (!location) {
-      throw "Location not found";
-    }
-    const book = await BookModel.findOneAndUpdate(
-      { id: bookId },
-      { location: location, updatedAt: now },
-      { new: true }
-    );
-    if (!book) {
-      throw "Book not Found";
-    }
-    return book;
-  } catch (error) {
-    return { message: error };
-  }
+  const bookObjectId = Types.ObjectId(bookId);
+  const locationObjectId = Types.ObjectId(locationId);
+
+  const location = await LocationModel.findById(locationObjectId);
+  if (!location) return null;
+  const book = await BookModel.findOneAndUpdate(
+    { id: bookObjectId },
+    { location: location, updatedAt: now },
+    { new: true }
+  );
+  return book;
 }
 
-const books = {};
+const books = {
+  createBook,
+  findAllBooksWith,
+  findBookById,
+  changeBookLocation,
+};
 
 export default books;
