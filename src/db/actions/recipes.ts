@@ -52,6 +52,13 @@ export async function getRandomRecipe() {
   return randomEntry;
 }
 
+// delete recipe
+export async function deleteRecipe(id: string) {
+  const recipeId = Types.ObjectId(id);
+  const deleted = RecipeModel.findByIdAndDelete(recipeId).lean();
+  return deleted;
+}
+
 // get all recipes in books
 
 // get all recipes from websites
@@ -66,6 +73,7 @@ const recipes = {
   updateRecipe,
   findRecipe,
   getRandomRecipe,
+  deleteRecipe,
 };
 
 export default recipes;

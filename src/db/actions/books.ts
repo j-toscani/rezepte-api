@@ -1,6 +1,5 @@
 import Book, { BookModel } from "../models/Book";
 import { Types } from "mongoose";
-import { LocationModel } from "../models/Location";
 
 // create new book entry
 async function createBook(book: Book) {
@@ -34,12 +33,18 @@ async function findBookById(id: string) {
 
 // update a book
 export async function updateBook(id: string, updates: {}) {
-  const recipe = await BookModel.findOneAndUpdate(
+  const book = await BookModel.findOneAndUpdate(
     { _id: Types.ObjectId(id) },
     { ...updates }
   ).lean();
 
-  return recipe;
+  return book;
+}
+
+export async function deleteBook(id: string) {
+  const bookId = Types.ObjectId(id);
+  const deleted = BookModel.findByIdAndDelete(bookId).lean();
+  return deleted;
 }
 
 const books = {
@@ -47,6 +52,7 @@ const books = {
   findAllBooksWith,
   findBookById,
   updateBook,
+  deleteBook,
 };
 
 export default books;

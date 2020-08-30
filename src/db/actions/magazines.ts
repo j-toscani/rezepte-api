@@ -34,10 +34,18 @@ export async function updateMagazine(id: string, updates: {}) {
   return UpdatedMagazine;
 }
 
+// delete a Magazine
+export async function deleteMagazine(id: string) {
+  const magazineId = Types.ObjectId(id);
+  const deleted = MagazineModel.findByIdAndDelete(magazineId).lean();
+  return deleted;
+}
+
 const magazines = {
   createMagazine,
   findAllMagazinesWith,
   updateMagazine,
+  deleteMagazine,
 };
 
 export default magazines;

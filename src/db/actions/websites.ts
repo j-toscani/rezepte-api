@@ -31,7 +31,7 @@ export async function findWebsite(id: string) {
   return website;
 }
 
-// add recipe to website
+// update a website
 export async function updateWebsite(id: string, updates: {}) {
   if (!checkMongooseId(id)) throw "Not a valid ID";
   const website = await WebsiteModel.findOneAndUpdate(
@@ -40,6 +40,13 @@ export async function updateWebsite(id: string, updates: {}) {
   ).lean();
 
   return website;
+}
+
+// delete a website
+export async function deleteWebsite(id: string) {
+  const websiteId = Types.ObjectId(id);
+  const deleted = WebsiteModel.findByIdAndDelete(websiteId).lean();
+  return deleted;
 }
 
 // get all recipes from all websites
@@ -51,6 +58,7 @@ const websites = {
   findAllWebsitesWith,
   updateWebsite,
   findWebsite,
+  deleteWebsite,
 };
 
 export default websites;

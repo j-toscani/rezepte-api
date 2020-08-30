@@ -29,10 +29,17 @@ export async function updateIssue(id: string, updates: {}) {
   return updatedIssue;
 }
 
+export async function deleteIssue(id: string) {
+  const issueId = Types.ObjectId(id);
+  const deleted = IssueModel.findByIdAndDelete(issueId).lean();
+  return deleted;
+}
+
 const issues = {
   createIssue,
   findIssue,
   updateIssue,
+  deleteIssue,
 };
 
 export default issues;

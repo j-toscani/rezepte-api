@@ -23,6 +23,11 @@ export async function findAllLocationsWith(options: {} = {}) {
 }
 
 // erase an old location
+export async function deleteLocation(id: string) {
+  const locationId = Types.ObjectId(id);
+  const deleted = LocationModel.findByIdAndDelete(locationId).lean();
+  return deleted;
+}
 
 // update an existing location
 export async function updateLocation(id: string, updates: {}) {
@@ -38,6 +43,7 @@ const locations = {
   createLocation,
   findAllLocationsWith,
   updateLocation,
+  deleteLocation,
 };
 
 export default locations;
