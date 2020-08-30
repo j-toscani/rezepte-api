@@ -24,6 +24,7 @@ router.post("/", async (req, res) => {
     res.status(500).send({ message: error });
   }
 });
+
 router.put("/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -34,6 +35,20 @@ router.put("/:id", async (req, res) => {
     if (!updatedLocation) throw "Location not Found";
 
     res.status(200).send(updatedLocation);
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!checkMongooseId(id)) throw "No valid ID";
+
+    const deleted = await locations.deleteLocation(id);
+    if (!deleted) throw "Item not found";
+
+    res.status(200).send(deleted);
   } catch (error) {
     res.status(500).send({ message: error });
   }

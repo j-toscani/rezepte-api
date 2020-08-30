@@ -43,4 +43,18 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!checkMongooseId(id)) throw "No valid ID";
+
+    const deleted = await recipes.deleteRecipe(id);
+    if (!deleted) throw "Item not found";
+
+    res.status(200).send(deleted);
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+});
+
 export default router;

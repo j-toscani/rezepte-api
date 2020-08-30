@@ -6,6 +6,7 @@
   "scripts": {
     "test": "test",
     "start": "node dist/",
+    "build": "tsc",
     "dev:start": "nodemon dist/",
     "dev:watch": "tsc --watch"
   },
