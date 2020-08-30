@@ -4,10 +4,10 @@ This is an API created for training purposes. It uses Typescript, Node, Express 
 
 ## MVP
 
-- [ ] Create a database with distict routes and actions to `create`, `update`, `read` and `delete` Sources, Recipes and Locations
-  - [ ] Each recipe can be found in a source (Website, Magazine (with issues) or Book)
-  - [ ] Each Source can be found in a location (Physical place)
-  - [ ] All Sources are accumulated under there own `router`
+- [x] Create a database with distict routes and actions to `create`, `update`, `read` and `delete` Sources, Recipes and Locations
+  - [x] Each recipe can be found in a source (Website, Magazine (with issues) or Book)
+  - [x] Each Source can be found in a location (Physical place)
+  - [x] All Sources are accumulated under there own `router`
   - [ ] Add a simple password + email account
 
 ## EXTRAS
