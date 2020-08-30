@@ -17,14 +17,14 @@ This is an API created for training purposes. It uses Typescript, Node, Express 
 
 # Set-Up
 
-To connect your database to your App, create a .env file and create the following variables:
+### To connect your database to your App, create a .env file and create the following variables:
 
 ```
 PORT=<port of your server>
 DB_URL=<link to your DB>
 ```
 
-Use the following commands in developement:
+### Use the following commands in developement:
 
 ```
 // install dependencies
@@ -37,7 +37,7 @@ npm run dev:watch
 npm run dev:start
 ```
 
-To start your project for use with a frontend use
+### To start your project for use with a frontend use
 
 ```
 // install dependencies
