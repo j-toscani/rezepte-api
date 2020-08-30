@@ -34,13 +34,13 @@ const schema = new Schema({
   source: [
     {
       type: Schema.Types.ObjectId,
-      required: true,
+      required: false,
       refPath: "onModel",
     },
   ],
   onModel: {
     type: String,
-    required: true,
+    required: false,
     enum: ["Book", "Issue"],
   },
 });

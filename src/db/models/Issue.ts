@@ -41,12 +41,12 @@ const schema = new Schema({
   },
   location: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
     ref: "Location",
   },
   magazine: {
     type: Schema.Types.ObjectId,
-    required: false,
+    required: true,
     ref: "Magazine",
   },
   recipes: [
