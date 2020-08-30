@@ -1,4 +1,6 @@
 import Website, { WebsiteModel } from "../models/Website";
+import { Types } from "mongoose";
+import checkMongooseId from "../../lib/checkMongooseId";
 
 // create new website entry
 export async function createWebsite(website: Website) {
@@ -23,10 +25,22 @@ export async function findAllWebsitesWith(options: {} = {}) {
 }
 
 // get one website
+export async function findWebsite(id: string) {
+  const mongooseId = Types.ObjectId(id);
+  const website = await WebsiteModel.findById(mongooseId).lean();
+  return website;
+}
 
 // add recipe to website
+export async function updateWebsite(id: string, updates: {}) {
+  if (!checkMongooseId(id)) throw "Not a valid ID";
+  const website = await WebsiteModel.findOneAndUpdate(
+    { _id: Types.ObjectId(id) },
+    { ...updates }
+  ).lean();
 
-// change location of website
+  return website;
+}
 
 // get all recipes from all websites
 
@@ -35,6 +49,8 @@ export async function findAllWebsitesWith(options: {} = {}) {
 const websites = {
   createWebsite,
   findAllWebsitesWith,
+  updateWebsite,
+  findWebsite,
 };
 
 export default websites;

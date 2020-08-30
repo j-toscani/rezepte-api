@@ -49,13 +49,6 @@ const schema = new Schema({
     required: true,
     ref: "Magazine",
   },
-  recipes: [
-    {
-      type: Schema.Types.ObjectId,
-      required: false,
-      ref: "Recipe",
-    },
-  ],
 });
 
 export const IssueModel = model<Issue>(DOCUMENT_NAME, schema, COLLECTION_NAME);

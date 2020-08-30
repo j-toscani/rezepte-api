@@ -14,15 +14,25 @@ export async function createIssue(issue: Issue) {
 // get one issue by id
 async function findIssue(id: string) {
   const issueId = Types.ObjectId(id);
-  const issue = IssueModel.findById(issueId);
+  const issueModel = IssueModel.findById(issueId);
+  const issue = issueModel.populate("location").populate("magazine").exec();
   return issue;
 }
 
-// change location of an issue
+// update an issue
+export async function updateIssue(id: string, updates: {}) {
+  const updatedIssue = await IssueModel.findOneAndUpdate(
+    { _id: Types.ObjectId(id) },
+    { ...updates }
+  ).lean();
+
+  return updatedIssue;
+}
 
 const issues = {
   createIssue,
   findIssue,
+  updateIssue,
 };
 
 export default issues;

@@ -31,18 +31,6 @@ const schema = new Schema({
     type: Schema.Types.String,
     required: true,
   },
-  source: [
-    {
-      type: Schema.Types.ObjectId,
-      required: false,
-      refPath: "onModel",
-    },
-  ],
-  onModel: {
-    type: String,
-    required: false,
-    enum: ["Book", "Issue"],
-  },
 });
 
 export const LocationModel = model<Location>(

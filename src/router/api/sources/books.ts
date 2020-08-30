@@ -28,8 +28,10 @@ router.post("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    if (!checkMongooseId(req.params.id)) throw "No valid ID";
-    const book = await books.findBookById(req.params.id);
+    const id = req.params.id;
+
+    if (!checkMongooseId(id)) throw "No valid ID";
+    const book = await books.findBookById(id);
     res.status(200).send(book);
   } catch (error) {
     res.status(403).send({ message: error });
@@ -38,12 +40,13 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const bookId = req.params.id;
-    const locationId = req.body.id;
-    if (!checkMongooseId(bookId) || !checkMongooseId(locationId))
-      throw "No valid ID";
-    const updatedBook = await books.changeBookLocation(bookId, locationId);
+    const id = req.params.id;
+    const updates = req.body;
+    if (!checkMongooseId(id)) throw "No valid ID";
+
+    const updatedBook = await books.updateBook(id, updates);
     if (!updatedBook) throw "Book was not Updated";
+
     res.status(200).send(updatedBook);
   } catch (error) {
     res.status(500).send({ message: error });

@@ -25,4 +25,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const updates = req.body;
+    const id = req.params.id;
+    if (!checkMongooseId(id)) throw "Not a valid ID";
+    const updatedMagazine = magazines.updateMagazine(id, updates);
+    if (!updatedMagazine) throw "Magazine not found";
+    res.status(200).send(updatedMagazine);
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+});
+
 export default router;

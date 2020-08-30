@@ -1,5 +1,6 @@
 import { Router } from "express";
 import locations from "../../db/actions/locations";
+import checkMongooseId from "../../lib/checkMongooseId";
 
 const router = Router();
 
@@ -19,6 +20,20 @@ router.post("/", async (req, res) => {
     const location = req.body;
     const savedLocation = await locations.createLocation(location);
     res.status(200).send(savedLocation);
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+});
+router.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updates = req.body;
+    if (!checkMongooseId(id)) throw "Not a valid ID";
+
+    const updatedLocation = await locations.updateLocation(id, updates);
+    if (!updatedLocation) throw "Location not Found";
+
+    res.status(200).send(updatedLocation);
   } catch (error) {
     res.status(500).send({ message: error });
   }

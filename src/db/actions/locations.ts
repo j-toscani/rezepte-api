@@ -1,4 +1,5 @@
 import Location, { LocationModel } from "../models/Location";
+import { Types } from "mongoose";
 
 // create a new location
 export async function createLocation(location: Location) {
@@ -20,15 +21,23 @@ export async function findAllLocationsWith(options: {} = {}) {
   const locations = await Promise.all(populatedLocations);
   return locations;
 }
+
 // erase an old location
 
-// rename an existing location
+// update an existing location
+export async function updateLocation(id: string, updates: {}) {
+  const updatedLocation = await LocationModel.findOneAndUpdate(
+    { _id: Types.ObjectId(id) },
+    { ...updates }
+  ).lean();
 
-// add a source to a location
+  return updatedLocation;
+}
 
 const locations = {
   createLocation,
   findAllLocationsWith,
+  updateLocation,
 };
 
 export default locations;

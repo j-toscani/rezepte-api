@@ -32,13 +32,11 @@ const schema = new Schema({
     required: true,
     maxlength: 200,
   },
-  source: [
-    {
-      type: Schema.Types.ObjectId,
-      required: true,
-      refPath: "onModel",
-    },
-  ],
+  source: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    refPath: "onModel",
+  },
   onModel: {
     type: String,
     required: true,
@@ -58,7 +56,7 @@ const schema = new Schema({
   },
   tags: {
     type: Schema.Types.Array,
-    required: true,
+    required: false,
   },
 });
 

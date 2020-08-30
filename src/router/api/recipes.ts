@@ -1,5 +1,6 @@
 import { Router } from "express";
 import recipes from "../../db/actions/recipes";
+import checkMongooseId from "../../lib/checkMongooseId";
 
 const router = Router();
 
@@ -17,7 +18,25 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const recipe = req.body;
+    if (!req.body.notes) {
+      req.body.notes = "keine Notizen";
+    }
     const savedRecipe = await recipes.createRecipe(recipe);
+    res.status(200).send(savedRecipe);
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    const updates = req.body;
+    const id = req.params.id;
+    if (!checkMongooseId(id)) throw "Not a valid ID";
+
+    const savedRecipe = await recipes.updateRecipe(id, updates);
+    if (!savedRecipe) throw "Recipe not Found";
+
     res.status(200).send(savedRecipe);
   } catch (error) {
     res.status(500).send({ message: error });

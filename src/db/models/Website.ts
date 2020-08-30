@@ -27,14 +27,9 @@ const schema = new Schema({
     required: true,
     maxlength: 250,
   },
-  issue: {
+  url: {
     type: Schema.Types.String,
     required: true,
-  },
-  recipes: {
-    type: Schema.Types.ObjectId,
-    required: false,
-    ref: "Recipe",
   },
 });
 

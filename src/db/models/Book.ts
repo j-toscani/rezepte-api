@@ -32,13 +32,6 @@ const schema = new Schema({
     required: false,
     ref: "Location",
   },
-  recipes: [
-    {
-      type: Schema.Types.ObjectId,
-      required: false,
-      ref: "Recipe",
-    },
-  ],
 });
 
 export const BookModel = model<Book>(DOCUMENT_NAME, schema, COLLECTION_NAME);

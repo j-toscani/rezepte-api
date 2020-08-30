@@ -28,34 +28,25 @@ async function findBookById(id: string) {
   const bookObjectId = Types.ObjectId(id);
   const bookDocument = await BookModel.findById(bookObjectId);
   if (!bookDocument) return null;
-  const book = await bookDocument.execPopulate();
+  const book = await bookDocument.populate("location").execPopulate();
   return book;
 }
 
-// change location of book
-async function changeBookLocation(
-  bookId: string,
-  locationId: string
-): Promise<Book | null> {
-  const now = new Date();
-  const bookObjectId = Types.ObjectId(bookId);
-  const locationObjectId = Types.ObjectId(locationId);
+// update a book
+export async function updateBook(id: string, updates: {}) {
+  const recipe = await BookModel.findOneAndUpdate(
+    { _id: Types.ObjectId(id) },
+    { ...updates }
+  ).lean();
 
-  const location = await LocationModel.findById(locationObjectId);
-  if (!location) return null;
-  const book = await BookModel.findOneAndUpdate(
-    { id: bookObjectId },
-    { location: location, updatedAt: now },
-    { new: true }
-  );
-  return book;
+  return recipe;
 }
 
 const books = {
   createBook,
   findAllBooksWith,
   findBookById,
-  changeBookLocation,
+  updateBook,
 };
 
 export default books;

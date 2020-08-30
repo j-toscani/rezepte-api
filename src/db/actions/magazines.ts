@@ -1,4 +1,5 @@
 import Magazine, { MagazineModel } from "../models/Magazine";
+import { Types } from "mongoose";
 
 // get all magazines
 export async function findAllMagazinesWith(options: {} = {}) {
@@ -23,11 +24,20 @@ export async function createMagazine(magazine: Magazine) {
   return savedMagazine;
 }
 
-// add issue to magazine
+// update a Magazine
+export async function updateMagazine(id: string, updates: {}) {
+  const UpdatedMagazine = await MagazineModel.findOneAndUpdate(
+    { _id: Types.ObjectId(id) },
+    { ...updates }
+  ).lean();
+
+  return UpdatedMagazine;
+}
 
 const magazines = {
   createMagazine,
   findAllMagazinesWith,
+  updateMagazine,
 };
 
 export default magazines;

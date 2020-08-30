@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+mongoose.set("returnOriginal", false);
+
 const startDB = (url: string) => {
   mongoose
     .connect(url, {
