@@ -25,7 +25,7 @@ export async function findAllLocationsWith(options: {} = {}) {
 // erase an old location
 export async function deleteLocation(id: string) {
   const locationId = Types.ObjectId(id);
-  const deleted = LocationModel.findByIdAndDelete(locationId).lean();
+  const deleted = LocationModel.findByIdAndDelete(locationId);
   return deleted;
 }
 
@@ -34,7 +34,7 @@ export async function updateLocation(id: string, updates: {}) {
   const updatedLocation = await LocationModel.findOneAndUpdate(
     { _id: Types.ObjectId(id) },
     { ...updates }
-  ).lean();
+  );
 
   return updatedLocation;
 }

@@ -44,7 +44,7 @@ export async function updateRecipe(id: string, updates: {}) {
 
 // get a random recipe
 export async function getRandomRecipe() {
-  const recipeModels = await RecipeModel.find({}).populate("source").lean();
+  const recipeModels = await RecipeModel.find({}).populate("source");
   if (recipeModels.length < 1) return null;
   const randomEntry =
     recipeModels[Math.floor(Math.random() * recipeModels.length - 1)];

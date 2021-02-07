@@ -36,14 +36,14 @@ export async function updateBook(id: string, updates: {}) {
   const book = await BookModel.findOneAndUpdate(
     { _id: Types.ObjectId(id) },
     { ...updates }
-  ).lean();
+  );
 
   return book;
 }
 
 export async function deleteBook(id: string) {
   const bookId = Types.ObjectId(id);
-  const deleted = BookModel.findByIdAndDelete(bookId).lean();
+  const deleted = BookModel.findByIdAndDelete(bookId);
   return deleted;
 }
 
