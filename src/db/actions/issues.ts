@@ -24,14 +24,14 @@ export async function updateIssue(id: string, updates: {}) {
   const updatedIssue = await IssueModel.findOneAndUpdate(
     { _id: Types.ObjectId(id) },
     { ...updates }
-  ).lean();
+  );
 
   return updatedIssue;
 }
 
 export async function deleteIssue(id: string) {
   const issueId = Types.ObjectId(id);
-  const deleted = IssueModel.findByIdAndDelete(issueId).lean();
+  const deleted = IssueModel.findByIdAndDelete(issueId);
   return deleted;
 }
 

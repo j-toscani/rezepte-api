@@ -1,7 +1,7 @@
 import express, { Response, Request, NextFunction } from "express";
 import dotenv from "dotenv";
 import { json, urlencoded } from "body-parser";
-import { ApiError, InternalError } from "./core/ApiError";
+// import { ApiError, InternalError } from "./core/ApiError";
 import cors from "cors";
 import router from "./router/router";
 import startDB from "./db/db";
@@ -32,12 +32,12 @@ app.use(router);
 }); */
 
 export const startServer = () => {
-  const promise = new Promise((res, rej) => {
+  const promise = new Promise((res, rej): void => {
     try {
       app.listen(port, () => {
         console.log(`Server listening on ${port}`);
         console.log(`Server Adress: http://localhost:${port}`);
-        res();
+        res(undefined);
       });
     } catch (err) {
       console.log(err, "Server was not able to start");
