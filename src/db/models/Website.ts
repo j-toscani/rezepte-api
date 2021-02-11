@@ -10,7 +10,7 @@ export default interface Website extends Document {
   name: string;
   issue?: string;
   location: string;
-  recipes: Recipe[];
+  recipes?: Recipe[];
 }
 
 const schema = new Schema({
@@ -31,6 +31,7 @@ const schema = new Schema({
     type: Schema.Types.String,
     required: true,
   },
+  recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
 });
 
 export const WebsiteModel = model<Website>(
