@@ -1,4 +1,5 @@
 import { Router } from "express";
+import verifyJwt from "../middleware/verifyJwt";
 
 import recipes from "./api/recipes";
 import locations from "./api/locations";
@@ -7,13 +8,9 @@ import auth from "./auth";
 
 const router = Router();
 
-router.get("/register", auth);
+router.use("/register", auth);
 
-router.get("/api", (req, res) => {
-  console.log("someone logged in");
-  console.log("validation complete");
-  res.send("You are logged in!");
-});
+router.use(verifyJwt);
 
 router.use("/api/locations", locations);
 router.use("/api/recipes", recipes);

@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 import { findUser, createUser } from "../db/actions/user";
 
 const router = Router();
-//Authentication Routes
-router.post(`/auth/register`, async (request, response) => {
+
+router.post("/register", async (request, response) => {
   const { name, password } = request.body;
   const hasPasswordAndName =
     name &&
@@ -29,7 +29,7 @@ router.post(`/auth/register`, async (request, response) => {
   }
 });
 
-router.post(`/auth/login`, async (request, response) => {
+router.post("/login", async (request, response) => {
   const { name, password } = request.body;
   const hasPasswordAndName =
     name &&
@@ -54,7 +54,11 @@ router.post(`/auth/login`, async (request, response) => {
       response.status(401).send("Wrong password or Username.");
     }
 
-    const token = jwt.sign(name, process.env.SECRET || "mysupersecretsectet");
+    if (!process.env.SECRET) {
+      throw new Error("NO SECRET PROVIDED");
+    }
+
+    const token = jwt.sign(name, process.env.SECRET);
 
     response.status(200).send(token);
   } catch (err) {
@@ -62,3 +66,5 @@ router.post(`/auth/login`, async (request, response) => {
     return;
   }
 });
+
+export default router;
