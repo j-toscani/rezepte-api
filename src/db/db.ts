@@ -9,7 +9,7 @@ const startDB = (url: string) => {
       useUnifiedTopology: true,
     })
     .then(() => console.log("DB connected"))
-    .catch(() => console.log("DB did not connect"));
+    .catch((err) => console.log("DB did not connect", err));
 };
 
 export default startDB;

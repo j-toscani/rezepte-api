@@ -27,7 +27,7 @@ export async function findAllWebsitesWith(options: {} = {}) {
 // get one website
 export async function findWebsite(id: string) {
   const mongooseId = Types.ObjectId(id);
-  const website = await WebsiteModel.findById(mongooseId).lean();
+  const website = await WebsiteModel.findById(mongooseId);
   return website;
 }
 
@@ -37,7 +37,7 @@ export async function updateWebsite(id: string, updates: {}) {
   const website = await WebsiteModel.findOneAndUpdate(
     { _id: Types.ObjectId(id) },
     { ...updates }
-  ).lean();
+  );
 
   return website;
 }
@@ -45,7 +45,7 @@ export async function updateWebsite(id: string, updates: {}) {
 // delete a website
 export async function deleteWebsite(id: string) {
   const websiteId = Types.ObjectId(id);
-  const deleted = WebsiteModel.findByIdAndDelete(websiteId).lean();
+  const deleted = WebsiteModel.findByIdAndDelete(websiteId);
   return deleted;
 }
 

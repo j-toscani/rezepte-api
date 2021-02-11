@@ -29,7 +29,7 @@ export async function updateMagazine(id: string, updates: {}) {
   const UpdatedMagazine = await MagazineModel.findOneAndUpdate(
     { _id: Types.ObjectId(id) },
     { ...updates }
-  ).lean();
+  );
 
   return UpdatedMagazine;
 }
@@ -37,7 +37,7 @@ export async function updateMagazine(id: string, updates: {}) {
 // delete a Magazine
 export async function deleteMagazine(id: string) {
   const magazineId = Types.ObjectId(id);
-  const deleted = MagazineModel.findByIdAndDelete(magazineId).lean();
+  const deleted = MagazineModel.findByIdAndDelete(magazineId);
   return deleted;
 }
 

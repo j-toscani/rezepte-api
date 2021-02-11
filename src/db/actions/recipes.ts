@@ -27,7 +27,7 @@ export async function findAllRecipes(options: {} = {}) {
 // get one recipe
 export async function findRecipe(id: string) {
   const mongooseId = Types.ObjectId(id);
-  const recipe = await RecipeModel.findById(mongooseId).lean();
+  const recipe = await RecipeModel.findById(mongooseId);
   return recipe;
 }
 
@@ -37,14 +37,14 @@ export async function updateRecipe(id: string, updates: {}) {
   const recipe = await RecipeModel.findOneAndUpdate(
     { _id: Types.ObjectId(id) },
     { ...updates }
-  ).lean();
+  );
 
   return recipe;
 }
 
 // get a random recipe
 export async function getRandomRecipe() {
-  const recipeModels = await RecipeModel.find({}).populate("source").lean();
+  const recipeModels = await RecipeModel.find({}).populate("source");
   if (recipeModels.length < 1) return null;
   const randomEntry =
     recipeModels[Math.floor(Math.random() * recipeModels.length - 1)];
@@ -55,7 +55,7 @@ export async function getRandomRecipe() {
 // delete recipe
 export async function deleteRecipe(id: string) {
   const recipeId = Types.ObjectId(id);
-  const deleted = RecipeModel.findByIdAndDelete(recipeId).lean();
+  const deleted = RecipeModel.findByIdAndDelete(recipeId);
   return deleted;
 }
 
