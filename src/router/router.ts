@@ -8,7 +8,7 @@ import auth from "./auth";
 
 const router = Router();
 
-router.use("/register", auth);
+router.use("/auth", auth);
 
 router.use(verifyJwt);
 

@@ -20,9 +20,8 @@ export default function verifyJwt(
     throw new Error("NO SECRET PROVIDED");
   }
 
-  jwt.verify(token, process.env.SECRET, (error, user) => {
+  jwt.verify(token, process.env.SECRET, (error, _user) => {
     if (error) return response.sendStatus(403);
-    request.body["user"] = user;
     next();
   });
 }
