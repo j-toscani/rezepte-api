@@ -8,7 +8,7 @@ This is an API created for training purposes. It uses Typescript, Node, Express 
   - [x] Each recipe can be found in a source (Website, Magazine (with issues) or Book)
   - [x] Each Source can be found in a location (Physical place)
   - [x] All Sources are accumulated under there own `router`
-  - [ ] Add a simple password + email account
+  - [x] Add a simple password + email account
 
 ## EXTRAS
 
@@ -22,7 +22,10 @@ This is an API created for training purposes. It uses Typescript, Node, Express 
 ```
 PORT=<port of your server>
 DB_URL=<link to your DB>
+SECRET=<long string you use for jwt authentication>
 ```
+
+If you are not familliar with JWT-Authentication please stat here https://jwt.io/ . If you find security issues in this projecvt feel free to create an Issue.
 
 ### Use the following commands in developement:
 

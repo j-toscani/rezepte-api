@@ -47,9 +47,10 @@ router.post("/login", async (request, response) => {
 
     if (!user) {
       response.status(404).send("User not found.");
+      return;
     }
 
-    const verified = verify(password, user[0].password);
+    const verified = verify(password, user.password);
 
     if (!verified) {
       response.status(401).send("Wrong password or Username.");

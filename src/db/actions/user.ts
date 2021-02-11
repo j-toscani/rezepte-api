@@ -18,5 +18,5 @@ export async function createUser(user: { name: string; password: string }) {
 }
 
 export async function findUser(user: { name: string; password: string }) {
-  return await UserModel.find({ name: user.name });
+  return await UserModel.findOne({ name: user.name });
 }
