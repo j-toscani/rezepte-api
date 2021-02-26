@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
   try {
     const allLocations = await locations.findAllLocationsWith();
     if (allLocations?.length === 0)
-      throw "There are no Websites in your Database";
-    res.status(200).send(allLocations);
+      res.status(204).send({ message: "No Locations" });
+    res.status(200).send({ data: allLocations });
   } catch (error) {
     res.status(403).send({ message: error });
   }
@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
   try {
     const location = req.body;
     const savedLocation = await locations.createLocation(location);
-    res.status(200).send(savedLocation);
+    res.status(200).send({ data: savedLocation });
   } catch (error) {
     res.status(500).send({ message: error });
   }
@@ -34,7 +34,7 @@ router.put("/:id", async (req, res) => {
     const updatedLocation = await locations.updateLocation(id, updates);
     if (!updatedLocation) throw "Location not Found";
 
-    res.status(200).send(updatedLocation);
+    res.status(200).send({ data: updatedLocation });
   } catch (error) {
     res.status(500).send({ message: error });
   }
@@ -48,7 +48,7 @@ router.delete("/:id", async (req, res) => {
     const deleted = await locations.deleteLocation(id);
     if (!deleted) throw "Item not found";
 
-    res.status(200).send(deleted);
+    res.status(200).send({ data: deleted });
   } catch (error) {
     res.status(500).send({ message: error });
   }

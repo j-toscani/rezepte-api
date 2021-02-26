@@ -10,6 +10,7 @@ enum StatusCode {
 
 enum ResponseStatus {
   SUCCESS = 200,
+  NO_CONTENT = 204,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   FORBIDDEN = 403,
@@ -23,14 +24,21 @@ class ApiResponse {
     protected status: ResponseStatus,
     protected message: String
   ) {}
-  public send(res: Response) {
-    return res.send(this.status).json({ message: this.message });
+  public send(res: Response, data?: any) {
+    return res
+      .send(this.status)
+      .json({ message: this.message, data: data ? data : null });
   }
 }
 
 export class ApiSuccess extends ApiResponse {
   constructor(message: string) {
     super(StatusCode.SUCCESS, ResponseStatus.SUCCESS, message);
+  }
+}
+export class ApiNoContent extends ApiResponse {
+  constructor(message: string) {
+    super(StatusCode.SUCCESS, ResponseStatus.NO_CONTENT, message);
   }
 }
 
